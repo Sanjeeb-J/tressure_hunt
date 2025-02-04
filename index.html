@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasure Hunt Adventure</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('treasure-map-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 50px auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #c90;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .clue-box {
+            margin: 20px;
+            padding: 20px;
+            background: #fff;
+            border: 3px dashed #c90;
+            border-radius: 10px;
+        }
+
+        input {
+            padding: 10px;
+            width: 200px;
+            margin: 10px;
+            border: 2px solid #c90;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #c90;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #a70;
+        }
+
+        #result {
+            margin: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗺️ Treasure Hunt Adventure 🏴‍☠️</h1>
+        <div id="question-container">
+            <!-- Questions will be loaded dynamically here -->
+        </div>
+    </div>
+
+    <script>
+        // Treasure Hunt Questions and Answers
+        const questions = [
+            {
+                question: "I have keys but no locks. I have space but no room. You can enter but can’t go outside. What am I?",
+                answer: "keyboard"
+            },
+            {
+                question: "What building has the most stories?",
+                answer: "library"
+            },
+            {
+                question: "The more you take, the more you leave behind. What am I?",
+                answer: "footsteps"
+            },
+            // Add more questions as needed
+        ];
+
+        let currentQuestion = 0;
+
+        // Initialize the first question
+        function loadQuestion() {
+            const container = document.getElementById('question-container');
+            container.innerHTML = `
+                <div class="clue-box">
+                    <h3>Clue #${currentQuestion + 1}</h3>
+                    <p>${questions[currentQuestion].question}</p>
+                    <input type="text" id="answer-input" placeholder="Enter your answer...">
+                    <button onclick="checkAnswer()">Submit</button>
+                    <div id="result"></div>
+                </div>
+            `;
+        }
+
+        // Check if answer is correct
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answer-input').value.toLowerCase().trim();
+            const correctAnswer = questions[currentQuestion].answer.toLowerCase();
+
+            if (userAnswer === correctAnswer) {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    loadQuestion();
+                } else {
+                    endGame();
+                }
+                document.getElementById('result').innerHTML = "✅ Correct! Loading next clue...";
+            } else {
+                document.getElementById('result').innerHTML = "❌ Incorrect! Try again!";
+            }
+        }
+
+        // Final screen
+        function endGame() {
+            document.getElementById('question-container').innerHTML = `
+                <div class="clue-box">
+                    <h2>🎉 Congratulations! 🎉</h2>
+                    <p>You've found the treasure!</p>
+                    <p>Contact us at treasurehunt@email.com to claim your prize!</p>
+                    <button onclick="location.reload()">Play Again</button>
+                </div>
+            `;
+        }
+
+        // Start the game
+        loadQuestion();
+    </script>
+</body>
+</html>
