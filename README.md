@@ -8,7 +8,7 @@ Players solve a series of riddles, and each correct answer unlocks the next clue
 ## 🌐 Live Website
 
 🔗 **Play Here:**  
-👉 `https://sanjeeb-j.github.io/tressure_hunt/`
+👉 https://sanjeeb-j.github.io/tressure_hunt/
 
 ---
 
